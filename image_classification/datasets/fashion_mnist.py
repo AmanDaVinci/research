@@ -32,6 +32,6 @@ class FashionMNIST(ImageClassificationDataset):
                        .tolist()
         with gzip.open(self.data_dir/image_file, 'rb') as path:
             images = np.frombuffer(path.read(), dtype=np.uint8, offset=16)\
-                       .reshape(len(labels), 784)
+                       .reshape(len(labels), 28, 28)
         images = [Image.fromarray(image, mode="L") for image in images]
         return images, labels
