@@ -47,7 +47,7 @@ class BasicTrainer(Trainer):
             step=examples_seen
         )
         log.info(f"Test\tLoss:{test_loss}\tMetric:{test_metric}")
-        path = self.ckpt_dir/f"train-till-{examples_seen}_test-loss-{test_loss:.3f}.pt"
+        path = self.ckpt_dir/f"model-{examples_seen}-{test_loss:.3f}.pt"
         save(self.model, opt, test_loss, examples_seen, path)
         log.info(f"Saved trained model checkpoint at {path}")
     
