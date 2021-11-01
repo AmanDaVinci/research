@@ -2,6 +2,7 @@
 data/
 settings.json
 launch.json
+outputs/
 
 
 # Byte-compiled / optimized / DLL files
