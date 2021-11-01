@@ -14,7 +14,11 @@ EMAIL = 'amanthevinci@gmail.com'
 AUTHOR = 'Aman'
 REQUIRES_PYTHON = '>=3.7.5'
 REQUIRED = [
-    # 'requests', 'maya', 'records',
+    'hydra-core==1.0',
+    'wandb==0.10.10',
+    'numpy==1.21.3',
+    'torch==1.10.0',
+    'torchvision==0.11.1',
 ]
 
 here = os.path.abspath(os.path.dirname(__file__))
