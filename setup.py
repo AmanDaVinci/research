@@ -47,8 +47,8 @@ setup(
     author_email=EMAIL,
     python_requires=REQUIRES_PYTHON,
     url=URL,
-    # packages=['image_classification'],
-    packages=find_packages(),
+    packages=['image_classification'],
+    # packages=find_packages(),
     package_data={'image-classifier': [
         'model_archive/model-250240-0.292.pt'
     ]},
