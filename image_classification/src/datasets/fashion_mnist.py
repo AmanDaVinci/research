@@ -3,8 +3,8 @@ import numpy as np
 from PIL import Image
 from typing import Any, List, Tuple, Optional, Callable
 
-from image_classification.utils import download
-from image_classification.datasets.base import ImageClassificationDataset
+from image_classification.src.utils import download
+from image_classification.src.datasets.base import ImageClassificationDataset
 
 
 class FashionMNIST(ImageClassificationDataset):
@@ -17,7 +17,6 @@ class FashionMNIST(ImageClassificationDataset):
         "t10k-labels-idx1-ubyte.gz",
     ]
     classes = ["T-shirt/top", "Trouser", "Pullover", "Dress", "Coat", "Sandal", "Shirt", "Sneaker", "Bag", "Ankle boot"]
-    # data_dir = "../../../data/fashion_mnist"
 
     def download_data(self):
         for file in self.files:

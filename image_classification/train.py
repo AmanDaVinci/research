@@ -3,7 +3,7 @@ import hydra
 from hydra.utils import get_original_cwd
 from omegaconf import DictConfig, OmegaConf
 
-from image_classification.utils import import_class
+from image_classification.src.utils import import_class
 
 
 @hydra.main(config_path="configs", config_name="config")

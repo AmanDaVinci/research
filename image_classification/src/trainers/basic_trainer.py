@@ -6,8 +6,8 @@ import torch
 from torch import optim
 from torch.utils.data.dataloader import DataLoader
 
-from image_classification.trainers.base import Trainer
-from image_classification.utils import save
+from image_classification.src.trainers.base import Trainer
+from image_classification.src.utils import save
 
 import logging
 log = logging.getLogger(__name__)
