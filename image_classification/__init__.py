@@ -1,4 +1,4 @@
-from image_classification.src import *
+from .src import *
 
 
 __display_name__ = "Image classification"
