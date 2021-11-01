@@ -1,0 +1,10 @@
+# @package _group_
+module: image_classification.trainers.basic_trainer
+class_name: BasicTrainer
+eval_interval: 100
+num_epochs: 5
+lr: 0.001
+eps: 1e-8
+betas: 
+  - 0.9
+  - 0.999

@@ -1,0 +1,5 @@
+# @package _group_
+module: image_classification.models.cnn
+class_name: CNN
+in_channels: 1
+out_dim: 10

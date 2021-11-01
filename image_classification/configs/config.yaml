@@ -1,0 +1,9 @@
+seed: 42
+data_dir: data
+output_dir: outputs
+checkpoint_dir: checkpoints
+
+defaults:
+  - dataset: fashion_mnist
+  - model: cnn
+  - trainer: basic
