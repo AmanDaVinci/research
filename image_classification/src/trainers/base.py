@@ -6,7 +6,7 @@ from typing import Any, List, Tuple, Dict, Optional, Callable
 
 from torch.utils.data import DataLoader
 from torch.utils.data.sampler import SubsetRandomSampler
-from image_classification.src.utils import import_class, import_object
+from src.utils import import_class, import_object
 
 import wandb
 import logging
