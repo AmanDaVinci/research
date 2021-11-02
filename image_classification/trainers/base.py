@@ -6,7 +6,7 @@ from typing import Any, List, Tuple, Dict, Optional, Callable
 
 from torch.utils.data import DataLoader
 from torch.utils.data.sampler import SubsetRandomSampler
-from src.utils import import_class, import_object
+from image_classification.utils import import_class, import_object
 
 import wandb
 import logging
@@ -37,14 +37,8 @@ class Trainer:
 
     def load_data(self):
         config = self.config.dataset
-        train_preprocessor = import_object(
-            "image_classification.preprocessors."+config.train_preprocessor,
-            "preprocessor"
-        )
-        test_preprocessor = import_object(
-            "image_classification.preprocessors."+config.test_preprocessor,
-            "preprocessor"
-        )
+        train_preprocessor = import_object(config.train_preprocessor, "preprocessor")
+        test_preprocessor = import_object(config.test_preprocessor, "preprocessor")
         dataset_class = import_class(config.module, config.class_name)
         train_dataset = dataset_class(
             is_train=True, transform=train_preprocessor, 

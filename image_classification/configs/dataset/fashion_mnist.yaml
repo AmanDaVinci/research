@@ -2,7 +2,7 @@
 module: image_classification.datasets.fashion_mnist
 class_name: FashionMNIST
 download: False
-test_preprocessor: basic
-train_preprocessor: basic
+test_preprocessor: image_classification.preprocessors.basic
+train_preprocessor: image_classification.preprocessors.basic
 train_eval_split: 50000
 batch_size: 64

@@ -3,8 +3,8 @@ import numpy as np
 from PIL import Image
 from typing import Any, List, Tuple, Optional, Callable
 
-from src.utils import download
-from src.datasets.base import ImageClassificationDataset
+from image_classification.utils import download
+from image_classification.datasets.base import ImageClassificationDataset
 
 
 class FashionMNIST(ImageClassificationDataset):
