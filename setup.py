@@ -19,6 +19,7 @@ REQUIRED = [
     'numpy==1.21.3',
     'torch==1.10.0',
     'torchvision==0.11.1',
+    'schema==0.7.4',
 ]
 
 here = os.path.abspath(os.path.dirname(__file__))
@@ -53,7 +54,7 @@ setup(
         'model_archive/*.pt',
     ]},
     include_package_data=True,
-    # py_modules=['mypackage'],
+    py_modules=['base_predictor'],
     entry_points={
         'console_scripts': [
             'train_image_classification=image_classification.train:main'
