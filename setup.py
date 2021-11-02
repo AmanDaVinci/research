@@ -48,7 +48,7 @@ setup(
     python_requires=REQUIRES_PYTHON,
     url=URL,
     # packages=['image_classification'],
-    packages=find_packages(include=["image_classification"]),
+    packages=find_packages(),
     package_data={'image_classification': [
         'model_archive/model-250240-0.292.pt',
     ]},
