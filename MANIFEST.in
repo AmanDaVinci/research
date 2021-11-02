@@ -1,1 +1,4 @@
 include README.md LICENSE
+recursive-include image_classification *.yaml
+global-exclude *.pyc
+global-exclude __pycache__
