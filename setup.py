@@ -48,10 +48,11 @@ setup(
     python_requires=REQUIRES_PYTHON,
     url=URL,
     # packages=['image_classification'],
-    packages=find_packages(),
-    package_data={'image-classifier': [
-        'model_archive/model-250240-0.292.pt'
+    packages=find_packages(include=["image_classification"]),
+    package_data={'image_classification': [
+        'model_archive/model-250240-0.292.pt',
     ]},
+    include_package_data=True,
     # py_modules=['mypackage'],
     entry_points={
         'console_scripts': [
@@ -59,6 +60,5 @@ setup(
             ],
     },
     install_requires=REQUIRED,
-    include_package_data=True,
     license='MIT',
 )
