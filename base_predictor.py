@@ -5,14 +5,20 @@ class BasePredictor(ABC):
 
     @property
     @abstractmethod
-    def display_name(self):
-        """ Human readable display name of the model """
+    def name(self):
+        """ Unique qualified name of the model """
         raise NotImplementedError
 
     @property
     @abstractmethod
-    def qualified_name(self):
-        """ Unique qualified name of the model """
+    def major_version(self):
+        """ Semantics: incompatible changes to model schema """
+        raise NotImplementedError
+
+    @property
+    @abstractmethod
+    def minor_version(self):
+        """ Semantic: backward compatible changes to model schema """
         raise NotImplementedError
 
     @property
@@ -39,18 +45,18 @@ class BasePredictor(ABC):
         raise NotImplementedError
 
     @abstractmethod
-    def preprocess(self, data):
+    def preprocess(self, data: dict) -> dict:
         raise NotImplementedError
 
     @abstractmethod
-    def predict(self, data):
+    def predict(self, data: dict) -> dict:
         raise NotImplementedError
 
     @abstractmethod
-    def postprocess(self, data):
+    def postprocess(self, data: dict) -> dict:
         raise NotImplementedError
 
-    def __call__(self, data):
+    def __call__(self, data: dict) -> dict:
         try:
             self.input_schema.validate(data)
         except Exception as e:
@@ -68,8 +74,8 @@ class BasePredictor(ABC):
             )
         return output
     
-    def __str__(self):
-        return self.qualified_name
+    def __str__(self) -> str:
+        return self.name
 
 
 

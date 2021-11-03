@@ -1,8 +1,8 @@
 import torch
 from PIL import Image
 from pathlib import Path
-from schema import Schema, Or
-from base_predictor import BasePredictor
+from schema import Schema, And, Or
+from base_predictor import BasePredictor, PredictorSchemaValidationException
 
 from image_classification.models.cnn import CNN
 from image_classification.preprocessors.basic import preprocessor
@@ -10,14 +10,19 @@ from image_classification.preprocessors.basic import preprocessor
 
 class ModelPredictor(BasePredictor):
 
-    display_name = "Fashion Image Classifier"
-    qualified_name = "fashion-image-classifier"
+    name = "fashion-image-classifier"
+    major_version = 0
+    minor_version = 1
     model_file = Path(__file__).parent/"model_archive"/"model-250240-0.292.pt"
     classes = ["T-shirt/top", "Trouser", "Pullover", "Dress", "Coat", 
-    "Sandal", "Shirt", "Sneaker", "Bag", "Ankle boot"]
+               "Sandal", "Shirt", "Sneaker", "Bag", "Ankle boot"]
     input_schema = Schema({
         "id": int,
-        "image": Image.Image
+        "image": str,
+        "height": And(int, lambda x: x==28),
+        "width": And(int, lambda x: x==28),
+        "pillow_mode": And(str, lambda s: s=="L"),
+        "encoding": And(str, lambda s: s=="latin-1")
     })
     output_schema = Schema({
         "id": int,
@@ -33,19 +38,26 @@ class ModelPredictor(BasePredictor):
         self._model_.to(device)
         self._model_.eval()
     
-    def preprocess(self, data):
-        data["image"] = preprocessor(data["image"])
+    def preprocess(self, data: dict) -> dict:
+        try:
+            byte_image = data["image"].encode("latin-1")
+            image = Image.frombytes("L", (28,28), byte_image, 'raw')
+        except Exception as e:
+            raise PredictorSchemaValidationException(
+                f"Invalid input data: {str(e)}"
+            )
+        image = preprocessor(image)
         # expand the batch dimension
-        data["image"] = torch.unsqueeze(data["image"],0)
+        data["image"] = torch.unsqueeze("image",0)
         return data
 
-    def predict(self, data):
+    def predict(self, data: dict) -> dict:
         data["image"] = data["image"].to(self._model_.device)
         y_pred = self._model_(data["image"])
         class_idx = y_pred.argmax(axis=1)
         data["label"] = self.classes[class_idx]
         return data
     
-    def postprocess(self, data):
+    def postprocess(self, data: dict) -> dict:
         data.pop("image")
         return data
