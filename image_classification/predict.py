@@ -48,7 +48,7 @@ class ModelPredictor(BasePredictor):
             )
         image = preprocessor(image)
         # expand the batch dimension
-        data["image"] = torch.unsqueeze("image",0)
+        data["image"] = torch.unsqueeze(image,0)
         return data
 
     def predict(self, data: dict) -> dict:
@@ -59,5 +59,7 @@ class ModelPredictor(BasePredictor):
         return data
     
     def postprocess(self, data: dict) -> dict:
-        data.pop("image")
-        return data
+        return {
+            "id": data["id"],
+            "label": data["label"],
+        }
